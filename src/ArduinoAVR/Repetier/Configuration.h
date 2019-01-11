@@ -200,13 +200,13 @@ pins. Separate multiple GCODEs with \n
 /** \brief Number of steps for a 1mm move in x direction.
 For xy gantry use 2*belt moved!
 Overridden if EEPROM activated. */
-#define XAXIS_STEPS_PER_MM 98.425196
+#define XAXIS_STEPS_PER_MM 100
 /** \brief Number of steps for a 1mm move in y direction.
 For xy gantry use 2*belt moved!
 Overridden if EEPROM activated.*/
-#define YAXIS_STEPS_PER_MM 98.425196
+#define YAXIS_STEPS_PER_MM 100
 /** \brief Number of steps for a 1mm move in z direction  Overridden if EEPROM activated.*/
-#define ZAXIS_STEPS_PER_MM 2560
+#define ZAXIS_STEPS_PER_MM 400
 #endif
 
 // ##########################################################################################
@@ -254,7 +254,7 @@ controlled by settings in extruder 0 definition. */
 #define EXT0_Y_OFFSET 0
 #define EXT0_Z_OFFSET 0
 // for skeinforge 40 and later, steps to pull the plastic 1 mm inside the extruder, not out.  Overridden if EEPROM activated.
-#define EXT0_STEPS_PER_MM 413 //385
+#define EXT0_STEPS_PER_MM 93 //385
 // What type of sensor is used?
 // 0 is no thermistor/temperature control
 // 1 is 100k thermistor (Epcos B57560G0107F000 - RepRap-Fab.org and many other)
@@ -330,7 +330,7 @@ Values for starts:
 The precise values may differ for different nozzle/resistor combination.
  Overridden if EEPROM activated.
 */
-#define EXT0_PID_INTEGRAL_DRIVE_MAX 140
+#define EXT0_PID_INTEGRAL_DRIVE_MAX 230
 /** \brief lower value for integral part
 
 The I state should converge to the exact heater output needed for the target temperature.
@@ -338,14 +338,14 @@ To prevent a long deviation from the target zone, this value limits the lower va
 A good start is 30 lower then the optimal value. You need to leave room for cooling.
  Overridden if EEPROM activated.
 */
-#define EXT0_PID_INTEGRAL_DRIVE_MIN 60
+#define EXT0_PID_INTEGRAL_DRIVE_MIN 40
 /** P-gain.  Overridden if EEPROM activated. */
-#define EXT0_PID_PGAIN_OR_DEAD_TIME   24
+#define EXT0_PID_PGAIN_OR_DEAD_TIME   7
 /** I-gain. Overridden if EEPROM activated.
 */
-#define EXT0_PID_I   0.88
+#define EXT0_PID_I   2
 /** Dgain.  Overridden if EEPROM activated.*/
-#define EXT0_PID_D 80
+#define EXT0_PID_D 40
 // maximum time the heater is can be switched on. Max = 255.  Overridden if EEPROM activated.
 #define EXT0_PID_MAX 255
 /** \brief Faktor for the advance algorithm. 0 disables the algorithm.  Overridden if EEPROM activated.
@@ -553,11 +553,11 @@ Retractions speeds are taken from RETRACTION_SPEED and RETRACTION_UNDO_SPEED
 // Steps normally needed for a full signal cycle.
 #define JAM_STEPS 220
 // Steps for reducing speed. Must be higher then JAM_STEPS
-#define JAM_SLOWDOWN_STEPS 380
+#define JAM_SLOWDOWN_STEPS 320
 // New speed multiplier which gets set when slowdown is reached.
 #define JAM_SLOWDOWN_TO 70
 // Last fallback. If we slip this much, we want to pause.
-#define JAM_ERROR_STEPS 430
+#define JAM_ERROR_STEPS 500
 /** To prevent signal bouncing, only consider changes if we are this much steps
  away from last signal change. */
 #define JAM_MIN_STEPS 10
@@ -577,7 +577,7 @@ need to increase this value. For one 6.8 Ohm heater 10 is ok. With two 6.8 Ohm h
 
 /** Prevent extrusions longer then x mm for one command. This is especially important if you abort a print. Then the
 extrusion position might be at any value like 23344. If you then have an G1 E-2 it will roll back 23 meter! */
-#define EXTRUDE_MAXLENGTH 100
+#define EXTRUDE_MAXLENGTH 160
 /** Skip wait, if the extruder temperature is already within x degrees. Only fixed numbers, 0 = off */
 #define SKIP_M109_IF_WITHIN 2
 
@@ -979,9 +979,9 @@ on this endstop.
 // For delta robot Z_MAX_LENGTH is the maximum travel of the towers and should be set to the distance between the hotend
 // and the platform when the printer is at its home position.
 // If EEPROM is enabled these values will be overridden with the values in the EEPROM
-#define X_MAX_LENGTH 165
-#define Y_MAX_LENGTH 175
-#define Z_MAX_LENGTH 116.820
+#define X_MAX_LENGTH 200
+#define Y_MAX_LENGTH 200
+#define Z_MAX_LENGTH 220
 // Coordinates for the minimum axis. Can also be negative if you want to have the bed start at 0 and the printer can go to the left side
 // of the bed. Maximum coordinate is given by adding the above X_MAX_LENGTH values.
 #define X_MIN_POS 0
@@ -1119,7 +1119,7 @@ or 16 * (200 + (7*22=154) = 354) = 5664 bytes! !1
 min is 5 * (200 + (7*10=70) =270) = 1350
  This leaves ~1K free RAM on an Arduino which has only 8k
 Mega. Used only for nonlinear systems like delta or tuga. */
-#define DELTASEGMENTS_PER_PRINTLINE 22
+#define DELTASEGMENTS_PER_PRINTLINE 20
 
 /** After x seconds of inactivity, the stepper motors are disabled.
     Set to 0 to leave them enabled.
@@ -1140,12 +1140,12 @@ Mega. Used only for nonlinear systems like delta or tuga. */
     */
 #define MAX_FEEDRATE_X 200
 #define MAX_FEEDRATE_Y 200
-#define MAX_FEEDRATE_Z 5
+#define MAX_FEEDRATE_Z 2
 
 /** Home position speed in mm/s. Overridden if EEPROM activated. */
-#define HOMING_FEEDRATE_X 80
-#define HOMING_FEEDRATE_Y 80
-#define HOMING_FEEDRATE_Z 3
+#define HOMING_FEEDRATE_X 40
+#define HOMING_FEEDRATE_Y 40
+#define HOMING_FEEDRATE_Z 2
 
 /** Set order of axis homing. Use HOME_ORDER_XYZ and replace XYZ with your order. 
  * If you measure Z with your extruder tip you need a hot extruder to get right measurement. In this
@@ -1883,7 +1883,7 @@ The following settings override uiconfig.h!
 27 or CONTROLLER_REPRAPWORLD_GLCD = ReprapWorld Graphical LCD
 */
 
-#define FEATURE_CONTROLLER NO_CONTROLLER
+#define FEATURE_CONTROLLER CONTROLLER_REPRAPDISCOUNT_GLCD
 
 /* You can have one keypad connected via single analog pin as seen on
  some printers with Melzi V2.0 board, 20x4 LCD and 5 buttons keypad. This must be
@@ -1898,18 +1898,18 @@ On 8 bit processors do not active all or you run out of text memory (64kb)
 and strange errors occur. 8-9 languages normally work.
 */
 #define LANGUAGE_EN_ACTIVE 1 // English
-#define LANGUAGE_DE_ACTIVE 1 // German
+#define LANGUAGE_DE_ACTIVE 0 // German
 #define LANGUAGE_NL_ACTIVE 0 // Dutch
-#define LANGUAGE_PT_ACTIVE 1 // Brazilian Portuguese
-#define LANGUAGE_IT_ACTIVE 1 // Italian
-#define LANGUAGE_ES_ACTIVE 1 // Spanish
+#define LANGUAGE_PT_ACTIVE 0 // Brazilian Portuguese
+#define LANGUAGE_IT_ACTIVE 0 // Italian
+#define LANGUAGE_ES_ACTIVE 0 // Spanish
 #define LANGUAGE_FI_ACTIVE 0 // Finnish
 #define LANGUAGE_SE_ACTIVE 0 // Swedish
-#define LANGUAGE_FR_ACTIVE 1 // French
+#define LANGUAGE_FR_ACTIVE 0 // French
 #define LANGUAGE_CZ_ACTIVE 0 // Czech
-#define LANGUAGE_PL_ACTIVE 1 // Polish
-#define LANGUAGE_TR_ACTIVE 1 // Turkish
-#define LANGUAGE_RU_ACTIVE 1 // Russian
+#define LANGUAGE_PL_ACTIVE 0 // Polish
+#define LANGUAGE_TR_ACTIVE 0 // Turkish
+#define LANGUAGE_RU_ACTIVE 0 // Russian
 
 /* Some displays loose their settings from time to time. Try uncommenting the
 auto-repair function if this is the case. It is not supported for all display
@@ -1919,8 +1919,8 @@ computations, so do not enable it if your display works stable!
 //#define TRY_AUTOREPAIR_LCD_ERRORS
 
 // This is line 2 of the status display at startup. Change to your like.
-#define UI_PRINTER_NAME "MyPrinter"
-#define UI_PRINTER_COMPANY "Self Made"
+#define UI_PRINTER_NAME "3D Printer"
+#define UI_PRINTER_COMPANY "IMXQD's"
 
 
 /** For graphic displays you can have a fixed top line. It can also contain
@@ -1945,7 +1945,7 @@ info pages with next/previous button/click-encoder */
 Unfortunately, the encoder have a different count of phase changes between clicks.
 Select an encoder speed from 0 = fastest to 2 = slowest that results in one menu move per click.
 */
-#define UI_ENCODER_SPEED 1
+#define UI_ENCODER_SPEED 2
 
 // Set to 1 to reverse encoder direction
 #define UI_REVERSE_ENCODER 0
@@ -2026,4 +2026,3 @@ If you have leveling with bed coating or fixed z min you can use this menu to ad
 //#define CUSTOM_EVENTS
 
 #endif
-
